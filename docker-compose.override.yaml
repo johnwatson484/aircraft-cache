@@ -16,6 +16,7 @@ services:
       - ./package.json:/home/node/package.json
     depends_on: 
       - aircraft-message
+      - aircraft-redis
     environment:
       MESSAGE_HOST: aircraft-message
       MESSAGE_USERNAME: rabbitmq
@@ -33,3 +34,13 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  aircraft-redis:
+    image: redis:6
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  redis_data:

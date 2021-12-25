@@ -1,5 +1,7 @@
 const amqp = require('amqplib/callback_api')
 const { message } = require('./config')
+const cache = require('./cache')
+const { v4: uuidv4 } = require('uuid')
 
 const subscribe = async (aircraft) => {
   const { host, port, username, password, exchange } = message
@@ -25,9 +27,10 @@ const subscribe = async (aircraft) => {
         console.log(' [*] Waiting for messages in %s.', q.queue)
         channel.bindQueue(q.queue, exchange, '')
 
-        channel.consume(q.queue, function (msg) {
+        channel.consume(q.queue, async function (msg) {
           if (msg.content) {
             console.log(' [x] %s', msg.content.toString())
+            await cache.set(uuidv4(), msg.content)
           }
         }, {
           noAck: true
