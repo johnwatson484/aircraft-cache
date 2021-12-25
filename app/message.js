@@ -40,4 +40,6 @@ const subscribe = async (aircraft) => {
   })
 }
 
-module.exports = subscribe
+module.exports = {
+  subscribe
+}
