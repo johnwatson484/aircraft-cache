@@ -1,0 +1,35 @@
+version: '3.8'
+
+# This override file should be used when running this service in isolation
+# to provide dependencies and expose ports for local testing
+
+services:
+  aircraft-cache:
+    build:
+      target: development
+    image: aircraft-cache-development
+    container_name: aircraft-cache-development
+    ports:
+      - "9230:9229"
+    volumes:
+      - ./app:/home/node/app
+      - ./package.json:/home/node/package.json
+    depends_on: 
+      - aircraft-message
+    environment:
+      MESSAGE_HOST: aircraft-message
+      MESSAGE_USERNAME: rabbitmq
+      MESSAGE_PASSWORD: rabbitmq
+
+  aircraft-message:
+    image: rabbitmq:3-management-alpine
+    container_name: aircraft-message
+    hostname: aircraft-message
+    environment:
+      RABBITMQ_ERLANG_COOKIE: rabbitmq
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - "15672:15672"
+      - "5672:5672"

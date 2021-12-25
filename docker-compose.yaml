@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  aircraft-cache:
+    build: .
+    image: aircraft-cache
+    container_name: aircraft-cache

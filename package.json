@@ -1,0 +1,29 @@
+{
+  "name": "aircraft-cache",
+  "version": "1.0.0",
+  "description": "Cache aircraft tracking alerts",
+  "main": "index.js",
+  "scripts": {
+    "start:watch": "nodemon --inspect=0.0.0.0 --ext js --legacy-watch app/index.js",
+    "start:debug": "nodemon --inspect-brk=0.0.0.0 --ext js --legacy-watch app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnwatson484/aircraft-cache.git"
+  },
+  "author": "John Watson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnwatson484/aircraft-cache/issues"
+  },
+  "homepage": "https://github.com/johnwatson484/aircraft-cache#readme",
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "joi": "^17.4.2",
+    "redis": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14",
+    "standard": "^16.0.4"
+  }
+}
