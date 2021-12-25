@@ -10,6 +10,16 @@ const schema = Joi.object().keys({
     username: Joi.string(),
     password: Joi.string(),
     exchange: Joi.string().default('aircraft-tracked')
+  }),
+  cache: Joi.object({
+    socket: Joi.object({
+      host: Joi.string(),
+      port: Joi.number().default(6379),
+      tls: Joi.boolean().default(false)
+    }),
+    password: Joi.string().allow(''),
+    partition: Joi.string().default('aircraft-cache'),
+    ttl: Joi.number().default(3600 * 1000 * 24 * 30) // 30 days
   })
 })
 
@@ -22,6 +32,16 @@ const config = {
     username: process.env.MESSAGE_USERNAME,
     password: process.env.MESSAGE_PASSWORD,
     exchange: process.env.MESSAGE_EXCHANGE
+  },
+  cache: {
+    socket: {
+      host: process.env.REDIS_HOSTNAME,
+      port: process.env.REDIS_PORT,
+      tls: process.env.NODE_ENV === 'production'
+    },
+    password: process.env.REDIS_PASSWORD,
+    partition: process.env.REDIS_PARTITION,
+    ttl: process.env.REDIS_TTL
   }
 }
 
