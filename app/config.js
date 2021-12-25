@@ -35,7 +35,7 @@ const config = {
   },
   cache: {
     socket: {
-      host: process.env.REDIS_HOSTNAME,
+      host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
       tls: process.env.NODE_ENV === 'production'
     },

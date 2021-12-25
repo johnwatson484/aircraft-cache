@@ -21,6 +21,7 @@ services:
       MESSAGE_HOST: aircraft-message
       MESSAGE_USERNAME: rabbitmq
       MESSAGE_PASSWORD: rabbitmq
+      REDIS_HOST: aircraft-redis
 
   aircraft-message:
     image: rabbitmq:3-management-alpine
