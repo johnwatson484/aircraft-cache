@@ -1,7 +1,6 @@
 const amqp = require('amqplib')
 const { message } = require('./config')
 const cache = require('./cache')
-const { v4: uuidv4 } = require('uuid')
 let connection
 let channel
 
@@ -20,8 +19,9 @@ const start = async (aircraft) => {
 
   await channel.consume(q.queue, async function (msg) {
     if (msg.content) {
-      console.log('%s', msg.content.toString())
-      await cache.set(uuidv4(), msg.content.toString())
+      const body = JSON.parse(msg.content.toString())
+      console.log('%s', body)
+      await cache.set(body.callSign, msg.content.toString())
     }
   }, {
     noAck: true
