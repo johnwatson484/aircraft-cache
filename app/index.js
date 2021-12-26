@@ -1,14 +1,15 @@
 const cache = require('./cache')
-const message = require('./message')
+const subscribe = require('./subscribe')
 
 const main = async () => {
   await cache.start()
-  await message.subscribe()
+  await subscribe.start()
 }
 
 for (const signal of ['SIGINT', 'SIGTERM', 'SIGQUIT']) {
   process.on(signal, async () => {
     await cache.stop()
+    await subscribe.stop()
     process.exit()
   })
 }

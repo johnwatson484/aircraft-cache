@@ -2,10 +2,11 @@ const amqp = require('amqplib')
 const { message } = require('./config')
 const cache = require('./cache')
 const { v4: uuidv4 } = require('uuid')
+let connection
 
-const subscribe = async (aircraft) => {
+const start = async (aircraft) => {
   const { host, port, username, password, exchange, queue } = message
-  const connection = await amqp.connect(`amqp://${username}:${password}@${host}:${port}`)
+  connection = await amqp.connect(`amqp://${username}:${password}@${host}:${port}`)
   const channel = await connection.createChannel()
   await channel.assertExchange(exchange, 'fanout', {
     durable: true
@@ -26,6 +27,11 @@ const subscribe = async (aircraft) => {
   })
 }
 
+const stop = async () => {
+  await connection.stop()
+}
+
 module.exports = {
-  subscribe
+  start,
+  stop
 }
