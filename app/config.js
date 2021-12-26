@@ -9,7 +9,8 @@ const schema = Joi.object().keys({
     port: Joi.number().default(5672),
     username: Joi.string(),
     password: Joi.string(),
-    exchange: Joi.string().default('aircraft-tracked')
+    exchange: Joi.string().default('aircraft-tracked'),
+    queue: Joi.string().default('aircraft-tracked-cache')
   }),
   cache: Joi.object({
     socket: Joi.object({
@@ -31,7 +32,8 @@ const config = {
     port: process.env.MESSAGE_PORT,
     username: process.env.MESSAGE_USERNAME,
     password: process.env.MESSAGE_PASSWORD,
-    exchange: process.env.MESSAGE_EXCHANGE
+    exchange: process.env.MESSAGE_EXCHANGE,
+    queue: process.env.MESSAGE_QUEUE
   },
   cache: {
     socket: {
