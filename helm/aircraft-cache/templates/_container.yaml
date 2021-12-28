@@ -2,8 +2,4 @@
 envFrom:
 - configMapRef:
     name: {{ .Values.name }}
-ports:
-- containerPort: {{ .Values.container.port }}
-  name: http
-  protocol: TCP
 {{- end -}}
