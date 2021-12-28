@@ -20,7 +20,7 @@ const start = async (aircraft) => {
   await channel.consume(q.queue, async function (msg) {
     if (msg.content) {
       const body = JSON.parse(msg.content.toString())
-      await cache.set(`${body.icao24}-${body.callSign}`, body)
+      await cache.set(body.icao24, body)
       console.log(`Cached aircraft: ${body.icao24}-${body.callSign}`)
     }
   }, {
