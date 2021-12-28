@@ -22,6 +22,10 @@ services:
       MESSAGE_USERNAME: rabbitmq
       MESSAGE_PASSWORD: rabbitmq
       REDIS_HOST: aircraft-redis
+    entrypoint: >
+      sh -c "
+        scripts/wait-for aircraft-message:5672 --
+        npm run start:watch"
 
   aircraft-message:
     image: rabbitmq:3-management-alpine

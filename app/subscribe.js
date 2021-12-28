@@ -15,12 +15,13 @@ const start = async (aircraft) => {
   const q = await channel.assertQueue(queue)
 
   await channel.bindQueue(q.queue, exchange, '')
-  console.log('Waiting for messages in %s.', q.queue)
+  console.log('Waiting for messages')
 
   await channel.consume(q.queue, async function (msg) {
     if (msg.content) {
       const body = JSON.parse(msg.content.toString())
-      await cache.set(body.callSign, body)
+      await cache.set(`${body.icao24}-${body.callSign}`, body)
+      console.log(`Cached aircraft: ${body.icao24}-${body.callSign}`)
     }
   }, {
     noAck: true
