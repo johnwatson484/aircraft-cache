@@ -20,8 +20,7 @@ const start = async (aircraft) => {
   await channel.consume(q.queue, async function (msg) {
     if (msg.content) {
       const body = JSON.parse(msg.content.toString())
-      console.log('%s', body)
-      await cache.set(body.callSign, msg.content.toString())
+      await cache.set(body.callSign, body)
     }
   }, {
     noAck: true
