@@ -1,0 +1,9 @@
+{{- include "helm-library.configmap" (list . "aircraft-cache.configmap") -}}
+{{- define "aircraft-cache.configmap" -}}
+data:
+  NODE_ENV: {{ quote .Values.environment }}
+  REDIS_HOST: {{ quote .Values.container.redisHost }}
+  MESSAGE_HOST: {{ quote .Values.container.messageHost }}  
+  MESSAGE_EXCHANGE: {{ quote .Values.container.messageExchange }}
+  MESSAGE_QUEUE: {{ quote .Values.container.messageQueue }}
+{{- end -}}
