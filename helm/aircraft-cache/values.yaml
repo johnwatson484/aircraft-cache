@@ -18,3 +18,7 @@ container:
 deployment:
   restartPolicy: Always
   replicas: 1
+  minReadySeconds: 0
+
+secret:
+  type: Opaque
