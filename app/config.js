@@ -39,7 +39,7 @@ const config = {
     socket: {
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      tls: process.env.NODE_ENV === 'production'
+      tls: process.env.REDIS_TLS
     },
     password: process.env.REDIS_PASSWORD,
     partition: process.env.REDIS_PARTITION,
