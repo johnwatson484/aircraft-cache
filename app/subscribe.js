@@ -20,7 +20,8 @@ const start = async (aircraft) => {
   await channel.consume(q.queue, async function (msg) {
     if (msg.content) {
       const body = JSON.parse(msg.content.toString())
-      await cache.set(body.icao24, body)
+      await cache.set('aircraft', body.icao24, body)
+      await cache.update('location', body.icao24, { location: [{ timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude }] })
       console.log(`Cached aircraft: ${body.icao24}-${body.callSign}`)
     }
   }, {
