@@ -21,7 +21,7 @@ const start = async (aircraft) => {
     if (msg.content) {
       const body = JSON.parse(msg.content.toString())
       await cache.set('aircraft', body.icao24, body)
-      await cache.update('location', body.icao24, { location: [{ timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude }] })
+      await cache.update('location', body.icao24, { location: [{ timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude, source: body.source }] })
       console.log(`Cached aircraft: ${body.icao24}-${body.callSign}`)
     }
   }, {
