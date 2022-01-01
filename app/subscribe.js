@@ -24,7 +24,7 @@ const start = async (aircraft) => {
       console.log(`Cached aircraft: ${body.icao24}-${body.callSign}`)
       await cache.update('location', body.icao24, {
         location: [{
-          timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude, trueTrack: body.trueTrack, source: body.source
+          timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude, trueTrackRadians: body.trueTrackRadians, source: body.source
         }]
       })
       console.log('Cached location:', body)
