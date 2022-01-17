@@ -20,7 +20,7 @@ const schema = Joi.object().keys({
     }),
     password: Joi.string().allow(''),
     partition: Joi.string().default('aircraft-cache'),
-    ttl: Joi.number().default(3600 * 1000 * 24 * 2) // 2 days
+    ttl: Joi.number().default(172800) // 2 days
   })
 })
 
