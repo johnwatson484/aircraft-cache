@@ -1,9 +1,8 @@
-environment: development
+environment: production
 name: aircraft-cache
 image: aircraft-cache
 
 container:
-  imagePullPolicy: Always
   requestMemory: 120Mi
   requestCpu: 120m
   limitMemory: 120Mi
@@ -11,14 +10,12 @@ container:
   redisHost:
   redisPassword:
   messageHost:
+  messageUsername:
   messagePassword:
   messageExchange: aircraft-tracked
   messageQueue: aircraft-tracked-cache
 
-deployment:
-  restartPolicy: Always
-  replicas: 1
-  minReadySeconds: 0
+deployment: {}
 
 secret:
   type: Opaque
