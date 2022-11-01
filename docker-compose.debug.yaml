@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   aircraft-cache:
     command: npm run start:debug
