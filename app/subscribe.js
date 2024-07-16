@@ -9,7 +9,7 @@ const start = async (aircraft) => {
   connection = await amqp.connect(`amqp://${username}:${password}@${host}:${port}`)
   channel = await connection.createChannel()
   await channel.assertExchange(exchange, 'fanout', {
-    durable: true
+    durable: true,
   })
 
   const q = await channel.assertQueue(queue)
@@ -23,13 +23,13 @@ const start = async (aircraft) => {
       await cache.set('aircraft', body.icao24, body)
       await cache.update('location', body.icao24, {
         location: [{
-          timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude, trueTrackRadians: body.trueTrackRadians, source: body.source
-        }]
+          timestamp: body.timestamp, longitude: body.longitude, latitude: body.latitude, trueTrackRadians: body.trueTrackRadians, source: body.source,
+        }],
       })
       console.log(`Cached tracked aircraft: ${body.icao24}-${body.callSign}`)
     }
   }, {
-    noAck: true
+    noAck: true,
   })
 }
 
@@ -40,5 +40,5 @@ const stop = async () => {
 
 module.exports = {
   start,
-  stop
+  stop,
 }
