@@ -17,4 +17,3 @@ extends:
     name: aircraft-cache
     deploy: true
     namespace: aircraft
-    hasSecureHelmValuesFile: true

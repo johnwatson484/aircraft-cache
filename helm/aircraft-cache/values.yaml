@@ -7,15 +7,12 @@ container:
   requestCpu: 120m
   limitMemory: 120Mi
   limitCpu: 120m
-  redisHost:
-  redisPassword:
-  messageHost:
-  messageUsername:
-  messagePassword:
+  redisHost: services.lynxmagnus.com
+  messageHost: services.lynxmagnus.com
   messageExchange: aircraft-tracked
   messageQueue: aircraft-tracked-cache
 
 deployment: {}
 
 secret:
-  type: Opaque
+  secretsPath: /aircraft-cache
